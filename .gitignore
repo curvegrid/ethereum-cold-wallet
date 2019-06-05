@@ -4,3 +4,4 @@ debug
 accounts/*
 ethereum-cold-wallet
 .ethereum_service/*
+.DS_Store
