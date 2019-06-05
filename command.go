@@ -51,7 +51,7 @@ var genAccountCmd = &cobra.Command{
 		timeFormat := time.Now().Format("2006-01-02_15-04-05")
 		timeDir := strings.Join([]string{"version_1", timeFormat}, "_")
 
-		accountDir, err := mkdirBySlice([]string{"account"})
+		accountDir, err := mkdirBySlice([]string{"accounts"})
 		if err != nil {
 			log.Fatalln("Fail to create account directory")
 		}

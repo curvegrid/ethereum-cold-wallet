@@ -232,7 +232,7 @@ func randomPickFromSlice(slice []string) string {
 }
 
 func accountDir(address string) (*string, error) {
-	ksPath := strings.Join([]string{"account", "keystore"}, "/")
+	ksPath := strings.Join([]string{"accounts", "keystore"}, "/")
 	timeFolders, err := ioutil.ReadDir(ksPath)
 	if err != nil {
 		return nil, errors.New("Get keystore directory error")
@@ -240,7 +240,7 @@ func accountDir(address string) (*string, error) {
 
 	keystoreName := strings.Join([]string{address, "json"}, ".")
 	for _, timeDir := range timeFolders {
-		timePath := strings.Join([]string{"account", "keystore", timeDir.Name()}, "/")
+		timePath := strings.Join([]string{"accounts", "keystore", timeDir.Name()}, "/")
 		files, err := ioutil.ReadDir(timePath)
 		if err != nil {
 			return nil, errors.New("Get timeDir error")

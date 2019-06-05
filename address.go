@@ -352,7 +352,7 @@ func decodeKS2Key(addressHex string) (*keystore.Key, error) {
 	if err != nil {
 		return nil, err
 	}
-	ksPath := strings.Join([]string{"account", "keystore", *timeDir}, "/")
+	ksPath := strings.Join([]string{"accounts", "keystore", *timeDir}, "/")
 	keyjson, err := readKeyStore(addressHex, ksPath)
 	if err != nil {
 		return nil, errors.New(strings.Join([]string{"read keystore error", err.Error()}, " "))
