@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"math/big"
+	"strconv"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -86,7 +87,7 @@ func esBlockFunc(block *types.Block) interface{} {
 	b := map[string]interface{}{
 		"height":     block.Header().Number,
 		"hash":       block.Hash().Hex(),
-		"time":       block.Time().String(),
+		"time":       strconv.Itoa(int(block.Time())),
 		"parenthash": block.ParentHash().Hex(),
 		"sha3uncles": block.UncleHash().Hex(),
 		"miner":      block.Coinbase().Hex(),
