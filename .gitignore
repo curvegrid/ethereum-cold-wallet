@@ -2,3 +2,5 @@ vendor/*
 .vscode/*
 debug
 accounts/*
+ethereum-cold-wallet
+.ethereum_service/*
