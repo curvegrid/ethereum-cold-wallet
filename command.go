@@ -57,11 +57,11 @@ var genAccountCmd = &cobra.Command{
 		}
 		addresses := []*csvAddress{}
 		for index := 0; index < number; index++ {
-			address, mnemonic, err := createAccount(*accountDir, timeDir)
+			address, mnemonic, privateKey, err := createAccount(*accountDir, timeDir)
 			if err != nil {
 				log.Fatalln(err.Error())
 			}
-			addresses = append(addresses, &csvAddress{Address: *address, Mnemonic: *mnemonic})
+			addresses = append(addresses, &csvAddress{Address: *address, Mnemonic: *mnemonic, PrivateKey: *privateKey})
 		}
 		export2CSV(addresses, *accountDir)
 	},

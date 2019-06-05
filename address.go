@@ -8,6 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
@@ -49,18 +50,19 @@ type MnemonicJSON struct {
 type csvAddress struct {
 	Address string `csv:"address"`
 	Mnemonic string `csv:"mnemonic"`
+	PrivateKey string `csv:"privatekey"`
 }
 
-func createAccount(accoutDir, timeDir string) (*string, *string, error) {
+func createAccount(accoutDir, timeDir string) (*string, *string, *string, error) {
 	// Generate a mnemonic for memorization or user-friendly seeds
 	mnemonic, err := mnemonicFun()
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 
 	privateKey, path, err := hdWallet(*mnemonic)
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 
 	// pristr := hex.EncodeToString(privateKey.D.Bytes())
@@ -88,7 +90,9 @@ func createAccount(accoutDir, timeDir string) (*string, *string, error) {
 		"Time:":                     time.Now().Format("Mon Jan _2 15:04:05 2006"),
 	}).Info("")
 
-	return &address, mnemonic, nil
+	keyString := fmt.Sprintf("%x", privateKey.D.Bytes())
+
+	return &address, mnemonic, &keyString, nil
 }
 
 func accountAuth(randomPwdFirst, randomPwdSecond string) string {
