@@ -51,7 +51,7 @@ func exportHexTx(from, to, txHex, hash string, value *big.Int, nonce *uint64, si
 		configurePath = config.RawTx
 		txFileName = strings.Join([]string{"unsign_from", from, "json"}, ".")
 	}
-	TxPath, err := mkdirBySlice([]string{HomeDir(), configurePath})
+	TxPath, err := mkdirBySlice([]string{configurePath})
 	if err != nil {
 		return errors.New(strings.Join([]string{"Could not create directory", err.Error()}, " "))
 	}
@@ -188,7 +188,7 @@ func encodeTx(tx *types.Transaction) (*string, error) {
 }
 
 func signTxCmd() {
-	files, err := ioutil.ReadDir(strings.Join([]string{HomeDir(), config.RawTx}, "/"))
+	files, err := ioutil.ReadDir(strings.Join([]string{config.RawTx}, "/"))
 	if err != nil {
 		log.Fatalln("read raw tx error", err.Error())
 	}
@@ -266,7 +266,7 @@ func signTx(simpletx *Tx) (*string, *string, *string, *string, *big.Int, *uint64
 }
 
 func sendTxCmd(nodeClient *ethclient.Client) {
-	files, err := ioutil.ReadDir(strings.Join([]string{HomeDir(), config.SignedTx}, "/"))
+	files, err := ioutil.ReadDir(strings.Join([]string{config.SignedTx}, "/"))
 	if err != nil {
 		log.Fatalln("read raw tx error", err.Error())
 	}
@@ -291,9 +291,9 @@ func sendTxCmd(nodeClient *ethclient.Client) {
 func readTxHex(fileName *string, signed bool) (*Tx, error) {
 	var filePath string
 	if signed {
-		filePath = strings.Join([]string{HomeDir(), config.SignedTx, *fileName}, "/")
+		filePath = strings.Join([]string{config.SignedTx, *fileName}, "/")
 	} else {
-		filePath = strings.Join([]string{HomeDir(), config.RawTx, *fileName}, "/")
+		filePath = strings.Join([]string{config.RawTx, *fileName}, "/")
 	}
 
 	bRawTx, err := ioutil.ReadFile(filePath)

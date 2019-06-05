@@ -41,7 +41,7 @@ func (db ormBbAlias) DBMigrate() {
 }
 
 func (db ormBbAlias) csv2db() {
-	addressPath := strings.Join([]string{HomeDir(), "eth_address.csv"}, "/")
+	addressPath := strings.Join([]string{"eth_address.csv"}, "/")
 	addressFile, err := os.OpenFile(addressPath, os.O_RDWR, os.ModePerm)
 	if err != nil {
 		log.Fatalln(err.Error())

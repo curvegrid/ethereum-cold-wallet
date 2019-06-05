@@ -31,7 +31,7 @@ func HomeDir() string {
 }
 
 func initLogger() {
-	path := strings.Join([]string{HomeDir(), ".ethereum_service"}, "/")
+	path := strings.Join([]string{".ethereum_service"}, "/")
 	if err := os.MkdirAll(path, 0700); err != nil {
 		log.Fatalln(err.Error())
 	}
