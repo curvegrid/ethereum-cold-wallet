@@ -90,7 +90,7 @@ func createAccount(accoutDir, timeDir string) (*string, *string, *string, error)
 		"Time:":                     time.Now().Format("Mon Jan _2 15:04:05 2006"),
 	}).Info("")
 
-	keyString := fmt.Sprintf("%x", privateKey.D.Bytes())
+	keyString := fmt.Sprintf("0x%x", privateKey.D.Bytes())
 
 	return &address, mnemonic, &keyString, nil
 }
