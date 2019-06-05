@@ -48,18 +48,19 @@ type MnemonicJSON struct {
 
 type csvAddress struct {
 	Address string `csv:"address"`
+	Mnemonic string `csv:"mnemonic"`
 }
 
-func createAccount(accoutDir, timeDir string) (*string, error) {
+func createAccount(accoutDir, timeDir string) (*string, *string, error) {
 	// Generate a mnemonic for memorization or user-friendly seeds
 	mnemonic, err := mnemonicFun()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	privateKey, path, err := hdWallet(*mnemonic)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	// pristr := hex.EncodeToString(privateKey.D.Bytes())
@@ -87,7 +88,7 @@ func createAccount(accoutDir, timeDir string) (*string, error) {
 		"Time:":                     time.Now().Format("Mon Jan _2 15:04:05 2006"),
 	}).Info("")
 
-	return &address, nil
+	return &address, mnemonic, nil
 }
 
 func accountAuth(randomPwdFirst, randomPwdSecond string) string {
