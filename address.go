@@ -211,10 +211,10 @@ func readPwd(address, pwdType, timeDir string) (*string, error) {
 	)
 	switch pwdType {
 	case "random_pwd_first":
-		dir := strings.Join([]string{HomeDir(), "account", "random_pwd_first", timeDir}, "/")
+		dir := strings.Join([]string{"accounts", "random_pwd_first", timeDir}, "/")
 		PwdFile = strings.Join([]string{dir, "randompwd.json"}, "/")
 	case "random_pwd_second":
-		dir := strings.Join([]string{HomeDir(), "account", "random_pwd_second", timeDir}, "/")
+		dir := strings.Join([]string{"accounts", "random_pwd_second", timeDir}, "/")
 		PwdFile = strings.Join([]string{dir, "randompwd.json"}, "/")
 	default:
 		return nil, errors.New("pwdType error")
@@ -352,7 +352,7 @@ func decodeKS2Key(addressHex string) (*keystore.Key, error) {
 	if err != nil {
 		return nil, err
 	}
-	ksPath := strings.Join([]string{HomeDir(), "account", "keystore", *timeDir}, "/")
+	ksPath := strings.Join([]string{"account", "keystore", *timeDir}, "/")
 	keyjson, err := readKeyStore(addressHex, ksPath)
 	if err != nil {
 		return nil, errors.New(strings.Join([]string{"read keystore error", err.Error()}, " "))
